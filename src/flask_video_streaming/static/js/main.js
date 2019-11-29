@@ -1,13 +1,13 @@
  	
-
-    var socket = io.connect('http://192.168.43.150:5000');
+    var socket = io.connect('http://192.168.43.202:5000');
+    // var socket = io.connect('http://192.168.43.150:5000');
     	socket.on('after_connect', function(msg){
    			console.log('After connect: ', msg.data);
 			});
 
     	socket.on('update value', function(msg){
     		console.log('value updated')
-                var data = "speed: "+msg.vel+"\nomega: "+msg.omega;
+                var data = "speed: "+msg.vel+"\n\r\n\n"+"23omega: "+msg.omega;
     		document.getElementById('textArea').innerHTML = data;
     	});
 

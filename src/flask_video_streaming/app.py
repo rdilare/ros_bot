@@ -1,19 +1,19 @@
 #!/usr/bin/env python2
 
-
 from flask import Flask, render_template, Response
-from pi_camera import Camera
 from flask_socketio import SocketIO, emit
+
 from velocity_publisher import vel_publisher
+from image_publisher import img_publisher
+from camera import Camera
 
 import rospy
+
 
 app = Flask(__name__)
 socketApp=SocketIO(app)
 
-
 data={'vel':0, 'omega':0}
-
 
 @app.after_request
 def add_header(r):
@@ -35,18 +35,16 @@ def index():
 
 def gen(camera):
     while True:
-        frame = camera.get_frame()
+        frame,arrayFrame = camera.get_frame()
+        img_publisher(arrayFrame)
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-
 
 
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
 
 
 @socketApp.on('connect')
@@ -71,10 +69,9 @@ def changed(message):
 
 
 
-
-
 def main():
-	socketApp.run(app,host="192.168.43.150", port="5000",debug=True)
+	# socketApp.run(app,host="192.168.43.150", port="5000",debug=True)
+    socketApp.run(app,host="192.168.43.202", port="5000",debug=True)
 
 if __name__=="__main__":
 	rospy.init_node("webapp", anonymous=True)

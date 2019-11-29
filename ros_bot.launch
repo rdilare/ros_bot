@@ -1,4 +1,4 @@
 <launch>
-	<node pkg="ros_bot" type="app.py" name ='webApp'/>
-	<node pkg="ros_bot" type="Arduino_node.py" name='Arduino_node'/>
+	<node pkg="ros_bot" type="app.py" name ='webApp' output="screen"/>
+	<!-- <node pkg="ros_bot" type="Arduino_node.py" name='Arduino_node'/> -->
 </launch>
