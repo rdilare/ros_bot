@@ -1,4 +1,4 @@
-#! /usr/bin/env python2
+#!/usr/bin/env python2
 
 from sensor_msgs.msg import CompressedImage
 
@@ -26,7 +26,8 @@ def get_center(mask_img):
 	return center(x,y) of detected object in \
 	binary mask_img.
 	"""
-	img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	# img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 	if len(contours)!=0:
 		cnt = contours[0]
 		(x,y),radius=cv2.minEnclosingCircle(cnt)
@@ -64,6 +65,9 @@ def main():
 
 
 if __name__=="__main__":
-	main()
+	try:
+		main()
+	except rospy.ROSInterruptException:
+20      pass
 
 cv2.destroyAllWindows()

@@ -2,6 +2,8 @@ import time
 import io
 import threading
 import picamera
+import cv2
+import numpy as np
 
 
 class Camera(object):
@@ -22,7 +24,9 @@ class Camera(object):
     def get_frame(self):
         Camera.last_access = time.time()
         self.initialize()
-        return self.frame
+        np_arr = np.fromstring(self.frame, dtype=np.uint8)
+        img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+        return self.frame, img
 
     @classmethod
     def _thread(cls):

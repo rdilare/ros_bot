@@ -30,4 +30,7 @@ def subscriber():
 	rospy.spin()
 
 if __name__=="__main__":
-	subscriber()
+	try:
+		subscriber()
+	except rospy.ROSInterruptException:
+20      pass

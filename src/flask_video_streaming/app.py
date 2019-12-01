@@ -5,7 +5,7 @@ from flask_socketio import SocketIO, emit
 
 from velocity_publisher import vel_publisher
 from image_publisher import img_publisher
-from camera import Camera
+from pi_camera import Camera
 
 import rospy
 
@@ -70,10 +70,14 @@ def changed(message):
 
 
 def main():
-	# socketApp.run(app,host="192.168.43.150", port="5000",debug=True)
-    socketApp.run(app,host="192.168.43.202", port="5000",debug=True)
+	socketApp.run(app,host="192.168.43.150", port="5000",debug=True)
+    # socketApp.run(app,host="192.168.43.202", port="5000",debug=True)
 
 if __name__=="__main__":
-	rospy.init_node("webapp", anonymous=True)
-	main()
-	#rospy.spin()
+    try :
+        rospy.init_node("webapp", anonymous=True)
+        main()
+        #rospy.spin()
+        
+    except rospy.ROSInterruptException:
+20      pass

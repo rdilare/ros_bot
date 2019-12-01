@@ -1,6 +1,6 @@
  	
-    var socket = io.connect('http://192.168.43.202:5000');
-    // var socket = io.connect('http://192.168.43.150:5000');
+    // var socket = io.connect('http://192.168.43.202:5000');
+    var socket = io.connect('http://192.168.43.150:5000');
     	socket.on('after_connect', function(msg){
    			console.log('After connect: ', msg.data);
 			});
