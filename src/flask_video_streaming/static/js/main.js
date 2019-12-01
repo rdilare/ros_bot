@@ -7,8 +7,8 @@
 
     	socket.on('update value', function(msg){
     		console.log('value updated')
-                var data = "speed: "+msg.vel+"\n\r\n\n"+"23omega: "+msg.omega;
-    		document.getElementById('textArea').innerHTML = data;
+    		document.getElementById('speedText').innerHTML ="speed: "+msg.vel;
+        document.getElementById('omegaText').innerHTML ="omega: "+msg.omega;
     	});
 
 

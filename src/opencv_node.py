@@ -68,6 +68,6 @@ if __name__=="__main__":
 	try:
 		main()
 	except rospy.ROSInterruptException:
-20      pass
+		pass
 
 cv2.destroyAllWindows()
