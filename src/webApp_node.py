@@ -5,8 +5,8 @@ from flask_socketio import SocketIO, emit
 
 
 from flask_video_streaming import app, socketApp
-from flask_video_streaming.camera import Camera
-# from flask_video_streaming.pi_camera import Camera
+# ~ from flask_video_streaming.camera import Camera
+from flask_video_streaming.pi_camera import Camera
 from velocity_publisher import vel_publisher
 from image_publisher import img_publisher
 
@@ -70,8 +70,8 @@ def changed(message):
 
 
 def main():
-	# socketApp.run(app,host="192.168.43.150", port="5000",debug=True)
-	socketApp.run(app,host="192.168.43.202", port="5000",debug=True)
+	socketApp.run(app,host="192.168.43.150", port="5000",debug=True)
+	# ~ socketApp.run(app,host="192.168.43.202", port="5000",debug=True)
 
 if __name__=="__main__":
 	try :

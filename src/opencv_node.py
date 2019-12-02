@@ -28,8 +28,8 @@ def get_center(mask_img):
 	return center(x,y) of detected object in \
 	binary mask_img.
 	"""
-	img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-	# contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	# ~ img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 	if len(contours)!=0:
 		cnt = contours[0]
 		(x,y),radius=cv2.minEnclosingCircle(cnt)
@@ -60,12 +60,12 @@ def callback(msg):
 
 	vel_publisher(vel,omega)
 
-	radius=10
-	img_circle=cv2.circle(frame.copy(),(x,y), radius, (0,0,0), 4)
-	cv2.putText(img_circle,'({},{})'.format(w/2-x,y),(25,100), font, 0.5,(0,0,0),2,cv2.LINE_AA)
+	# ~ radius=10
+	# ~ img_circle=cv2.circle(frame.copy(),(x,y), radius, (0,0,0), 4)
+	# ~ cv2.putText(img_circle,'({},{})'.format(w/2-x,y),(25,100), font, 0.5,(0,0,0),2,cv2.LINE_AA)
 
-	cv2.imshow('frame',img_circle)
-	cv2.waitKey(2)
+	# ~ cv2.imshow('frame',img_circle)
+	# ~ cv2.waitKey(2)
 
 def main():
 	rospy.init_node("opencv_velocity_publisher",anonymous=True)
