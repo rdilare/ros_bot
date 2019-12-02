@@ -18,10 +18,12 @@ def get_mask(img,color,inRange=[5,50,50]):
 	hsv=cv2.cvtColor(frame,cv2.COLOR_BGR2HSV)
 	l_color=np.array([i-j for i,j in zip(color,inRange)])
 	u_color=np.array([i+j for i,j in zip(color,inRange)])
-	mask1=cv2.inRange(hsv, l_color, u_color)
-	result=cv2.bitwise_and(img,img,mask=mask1)
+	mask=cv2.inRange(hsv, l_color, u_color)
+	blur_mask=cv2.GaussianBlur(mask, (5,5),0)
+	ret,thresh_mask = cv2.threshold(blur_mask,150,255,cv2.THRESH_BINARY)
 
-	return mask1
+
+	return thresh_mask
 
 def get_center(mask_img):
 	"""
@@ -31,7 +33,8 @@ def get_center(mask_img):
 	# ~ img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 	contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 	if len(contours)!=0:
-		cnt = contours[0]
+		# cnt = contours[0]
+		cnt = max(contours, key = cv2.contourArea)
 		(x,y),radius=cv2.minEnclosingCircle(cnt)
 	else :
 		x,y = 0,0
@@ -48,7 +51,7 @@ def callback(msg):
 
 	h,w = frame.shape[0:2]
 
-	result = get_mask(frame,color=[55,150,150],inRange=[10,100,100])
+	result = get_mask(frame,color=[60,150,150],inRange=[10,100,100])
 	x,y = get_center(result)
 
 	if x == 0:
@@ -64,7 +67,7 @@ def callback(msg):
 	# ~ img_circle=cv2.circle(frame.copy(),(x,y), radius, (0,0,0), 4)
 	# ~ cv2.putText(img_circle,'({},{})'.format(w/2-x,y),(25,100), font, 0.5,(0,0,0),2,cv2.LINE_AA)
 
-	# ~ cv2.imshow('frame',img_circle)
+	# ~ cv2.imshow('frame',result)
 	# ~ cv2.waitKey(2)
 
 def main():
@@ -81,3 +84,4 @@ if __name__=="__main__":
 		pass
 
 cv2.destroyAllWindows()
+

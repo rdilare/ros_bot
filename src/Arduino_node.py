@@ -11,8 +11,8 @@ def runBot(msg):
 	v=msg.linear.x
 	w=msg.angular.z
 	l,r=.8,.3 #bot's track-width and wheel radius.
-	vA = (1/r)*(v + (w*l/2))
-	vB = (1/r)*(v - (w*l/2))
+	vB = (1/r)*(v + (w*l/2))
+	vA = (1/r)*(v - (w*l/2))
 	global s
 	# call = s.readline()
 	# print (call)
@@ -33,4 +33,4 @@ if __name__=="__main__":
 	try:
 		subscriber()
 	except rospy.ROSInterruptException:
-20      pass
+		pass
