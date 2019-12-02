@@ -2,6 +2,8 @@
 
 from sensor_msgs.msg import CompressedImage
 
+from velocity_publisher import vel_publisher
+
 import cv2
 import numpy as np
 import rospy
@@ -26,8 +28,8 @@ def get_center(mask_img):
 	return center(x,y) of detected object in \
 	binary mask_img.
 	"""
-	# img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-	contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	img, contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+	# contours, hierarchy = cv2.findContours(mask_img,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 	if len(contours)!=0:
 		cnt = contours[0]
 		(x,y),radius=cv2.minEnclosingCircle(cnt)
@@ -37,7 +39,6 @@ def get_center(mask_img):
 	return int(x),int(y)
 
 
-font = cv2.FONT_HERSHEY_SIMPLEX
 
 
 def callback(msg):
@@ -45,15 +46,23 @@ def callback(msg):
 	np_arr = np.fromstring(msg.data, dtype=np.uint8)
 	frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
 
+	h,w = frame.shape[0:2]
 
-	result = get_mask(frame,color=[100,150,150],inRange=[30,100,100])
+	result = get_mask(frame,color=[55,150,150],inRange=[10,100,100])
 	x,y = get_center(result)
+
+	if x == 0:
+		x=w/2
+
+	k = 10
+	vel = 0
+	omega = -k*(w/2 - x)
+
+	vel_publisher(vel,omega)
 
 	radius=10
 	img_circle=cv2.circle(frame.copy(),(x,y), radius, (0,0,0), 4)
-
-
-	cv2.putText(img_circle,'({},{})'.format(300-x,y),(25,100), font, 0.5,(0,0,0),2,cv2.LINE_AA)
+	cv2.putText(img_circle,'({},{})'.format(w/2-x,y),(25,100), font, 0.5,(0,0,0),2,cv2.LINE_AA)
 
 	cv2.imshow('frame',img_circle)
 	cv2.waitKey(2)
@@ -63,6 +72,7 @@ def main():
 	subscriber = rospy.Subscriber("/image",CompressedImage,callback)
 	rospy.spin()
 
+font = cv2.FONT_HERSHEY_SIMPLEX
 
 if __name__=="__main__":
 	try:
