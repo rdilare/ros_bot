@@ -35,7 +35,7 @@ def index():
 
 def gen(camera):
 	while True:
-		frame,arrayFrame = camera.get_frame()
+		frame, arrayFrame = camera.get_frame()
 		img_publisher(arrayFrame)
 		yield (b'--frame\r\n'
 			   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
@@ -77,7 +77,7 @@ if __name__=="__main__":
 	try :
 		rospy.init_node("webapp", anonymous=True)
 		main()
-		#rospy.spin()
+		rospy.spin()
 		
 	except rospy.ROSInterruptException:
 		pass

@@ -26,7 +26,8 @@ class Camera(object):
         self.initialize()
         np_arr = np.fromstring(self.frame, dtype=np.uint8)
         img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-        return self.frame, img
+        time.sleep(.05)
+        return self.frame,img
 
     @classmethod
     def _thread(cls):

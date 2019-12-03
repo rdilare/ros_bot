@@ -57,7 +57,7 @@ def callback(msg):
 	if x == 0:
 		x=w/2
 
-	k = 10
+	k = .1
 	vel = 0
 	omega = -k*(w/2 - x)
 
@@ -71,7 +71,7 @@ def callback(msg):
 	# ~ cv2.waitKey(2)
 
 def main():
-	rospy.init_node("opencv_velocity_publisher",anonymous=True)
+	rospy.init_node("opencv_node",anonymous=True)
 	subscriber = rospy.Subscriber("/image",CompressedImage,callback)
 	rospy.spin()
 
@@ -83,5 +83,5 @@ if __name__=="__main__":
 	except rospy.ROSInterruptException:
 		pass
 
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
 

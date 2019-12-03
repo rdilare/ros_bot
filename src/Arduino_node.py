@@ -17,8 +17,9 @@ def runBot(msg):
 	# call = s.readline()
 	# print (call)
 	# if b"ok" in call:
-	vA=vA*200/33
-	vB=vB*200/33
+	vA=max(-255,min(255,vA*200/33))
+	vB=max(-255,min(255,vB*200/33))
+	
 	x=bytearray("{},{};".format(vA,vB))
 	print(x)
 	s.write(x)
@@ -31,6 +32,7 @@ def subscriber():
 
 if __name__=="__main__":
 	try:
+		s = Serial("/dev/ttyUSB0",115200,timeout=0.1)
 		subscriber()
 	except rospy.ROSInterruptException:
 		pass
