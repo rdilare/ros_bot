@@ -12,10 +12,22 @@
     	});
 
 
-    	var v1;
-    	function down(){;
-    	iv = setInterval(syncS1,100);
+    	var iv;
+    	function vPlus_down(){
+    	iv = setInterval(()=>sync(v=.2,w=0,stop=false),100);
     	}
+    	function vMinus_down(){
+    	iv = setInterval(()=>sync(v=-.2,w=0,stop=false),100);
+    	}
+    	function wPlus_down(){
+    	iv = setInterval(()=>sync(v=0,w=.1,stop=false),100);
+    	}
+    	function wMinus_down(){
+    	iv = setInterval(()=>sync(v=0,w=-.1,stop=false),100);
+    	}
+      function stop_down(){
+      iv = setInterval(()=>sync(v=0,w=0,stop=true),100);
+      }
     	
     	function up(){
     		clearInterval(iv);
