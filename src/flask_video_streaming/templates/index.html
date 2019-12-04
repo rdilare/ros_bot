@@ -18,10 +18,18 @@
 	<!-- <h1 style="position:absolute; display:block" >Video Streaming Demonstration</h1> -->
 	<div class="controls">
 		<div class="myButton middle" onclick="sync(0,0,true)"><p class="button-text">||</p></div>
-		<div class="myButton left" onclick="sync(0,-0.5)"><p class="button-text"><</p></div>
-		<div class="myButton right" onclick="sync(0,0.5)"><p class="button-text">></p></div>
-		<div class="myButton top" onclick="sync(2,0)"><p class="button-text">^</p></div>
-		<div class="myButton bottom" onclick="sync(-2,0)"><p class="button-text">v</p></div>
+		<div class="myButton left" ontouchstart="wPlus_down()" ontouchend="up()" onmousedown="wPlus_down()" onmouseup="up()">
+			<p class="button-text"><</p>
+		</div>
+		<div class="myButton right" ontouchstart="wMinus_down()" ontouchend="up()" onmousedown="wMinus_down()" onmouseup="up()">
+			<p class="button-text">></p>
+		</div>
+		<div class="myButton top" ontouchstart="vPlus_down()" ontouchend="up()" onmousedown="vPlus_down()" onmouseup="up()">
+			<p class="button-text">^</p>
+		</div>
+		<div class="myButton bottom" ontouchstart="vMinus_down()" ontouchend="up()" onmousedown="vMinus_down()" onmouseup="up()">
+			<p class="button-text">v</p>
+		</div>
 	</div>
 	<div id="textArea" >
 		<p id="speedText">speed: 0 </p>

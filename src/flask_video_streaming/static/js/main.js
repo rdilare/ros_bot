@@ -1,32 +1,32 @@
  	
-    // var socket = io.connect('http://192.168.43.202:5000');
-    var socket = io.connect('http://192.168.43.150:5000');
+    var socket = io.connect('http://192.168.43.202:5000');
+    // var socket = io.connect('http://192.168.43.150:5000');
     	socket.on('after_connect', function(msg){
    			console.log('After connect: ', msg.data);
 			});
 
     	socket.on('update value', function(msg){
     		console.log('value updated')
-    		document.getElementById('speedText').innerHTML ="speed: "+msg.vel;
-        document.getElementById('omegaText').innerHTML ="omega: "+msg.omega;
+    		document.getElementById('speedText').innerHTML ="speed: "+Math.floor(msg.vel*100)/100;
+        document.getElementById('omegaText').innerHTML ="omega: "+Math.floor(msg.omega*100)/100;
     	});
 
-
+ 
     	var iv;
     	function vPlus_down(){
-    	iv = setInterval(()=>sync(v=.2,w=0,stop=false),100);
+    	iv = setInterval(()=>sync(v=.2,w=0,stop=false),200);
     	}
     	function vMinus_down(){
-    	iv = setInterval(()=>sync(v=-.2,w=0,stop=false),100);
+    	iv = setInterval(()=>sync(v=-.2,w=0,stop=false),200);
     	}
     	function wPlus_down(){
-    	iv = setInterval(()=>sync(v=0,w=.1,stop=false),100);
+    	iv = setInterval(()=>sync(v=0,w=.1,stop=false),200);
     	}
     	function wMinus_down(){
-    	iv = setInterval(()=>sync(v=0,w=-.1,stop=false),100);
+    	iv = setInterval(()=>sync(v=0,w=-.1,stop=false),200);
     	}
       function stop_down(){
-      iv = setInterval(()=>sync(v=0,w=0,stop=true),100);
+      iv = setInterval(()=>sync(v=0,w=0,stop=true),200);
       }
     	
     	function up(){
