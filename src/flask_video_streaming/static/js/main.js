@@ -1,6 +1,6 @@
  	
-    var socket = io.connect('http://192.168.43.202:5000');
-    // var socket = io.connect('http://192.168.43.150:5000');
+    // var socket = io.connect('http://192.168.43.202:5000');
+    var socket = io.connect('http://192.168.43.150:5000');
     	socket.on('after_connect', function(msg){
    			console.log('After connect: ', msg.data);
 			});
@@ -14,19 +14,19 @@
  
     	var iv;
     	function vPlus_down(){
-    	iv = setInterval(()=>sync(v=.2,w=0,stop=false),200);
+    	iv = setInterval(()=>sync(v=.4,w=0,stop=false),150);
     	}
     	function vMinus_down(){
-    	iv = setInterval(()=>sync(v=-.2,w=0,stop=false),200);
+    	iv = setInterval(()=>sync(v=-.4,w=0,stop=false),150);
     	}
     	function wPlus_down(){
-    	iv = setInterval(()=>sync(v=0,w=.1,stop=false),200);
+    	iv = setInterval(()=>sync(v=0,w=.2,stop=false),150);
     	}
     	function wMinus_down(){
-    	iv = setInterval(()=>sync(v=0,w=-.1,stop=false),200);
+    	iv = setInterval(()=>sync(v=0,w=-.2,stop=false),150);
     	}
       function stop_down(){
-      iv = setInterval(()=>sync(v=0,w=0,stop=true),200);
+      iv = setInterval(()=>sync(v=0,w=0,stop=true),150);
       }
     	
     	function up(){

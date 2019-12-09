@@ -1,5 +1,5 @@
 <launch>
 	<node pkg="ros_bot" type="webApp_node.py" name ='webApp' output="screen"/>
 	<node pkg="ros_bot" type="Arduino_node.py" name='Arduino_node'/>
-	<node pkg="ros_bot" type="opencv_node.py" name="opencv_node" /> 
+	<!--<node pkg="ros_bot" type="opencv_node.py" name="opencv_node" /> -->
 </launch>
