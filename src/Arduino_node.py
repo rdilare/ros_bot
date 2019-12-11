@@ -11,8 +11,8 @@ s = Serial("/dev/ttyUSB0",115200,timeout=0.1)
 pre_time = 0
 pre_v = 0
 pre_w = 0
-a_max = 1.5
-alpha_max = 1.2
+a_max = .25
+alpha_max = 2.5
 
 
 
@@ -28,28 +28,28 @@ def runBot(msg):
 	#delta_v = (v-pre_v) if (v-pre_v)!=0 else 1
 	#delta_w = (w-pre_w) if (w-pre_w)!=0 else 1
 	
-	dir_v = (v-pre_v)/abs(v-pre_v) if (v-pre_v)!=0 else 0
-	dir_w = (w-pre_w)/abs(w-pre_w) if (w-pre_w)!=0 else 0
+	# ~ dir_v = (v-pre_v)/abs(v-pre_v) if (v-pre_v)!=0 else 0
+	# ~ dir_w = (w-pre_w)/abs(w-pre_w) if (w-pre_w)!=0 else 0
 	
-	calc_v = pre_v + dir_v*a_max*delta_t
-	calc_w = pre_w + dir_w*alpha_max*delta_t
+	# ~ calc_v = pre_v + dir_v*a_max*delta_t
+	# ~ calc_w = pre_w + dir_w*alpha_max*delta_t
 	
-	v = pre_v = calc_v if v!=0 else 0
-	w = pre_w = calc_w if w!=0 else 0
+	# ~ v = pre_v = calc_v if v!=0 else 0
+	# ~ w = pre_w = calc_w if w!=0 else 0
 	
 	
-	l,r=.14,.06 #bot's track-width and wheel radius.
-	vB = (1/r)*(v + (w*l/2))
-	vA = (1/r)*(v - (w*l/2))
+	l,r=.14,.03 #bot's track-width and wheel radius.
+	vB = (1.0/r)*(v + (w*l/2.0))
+	vA = (1.0/r)*(v - (w*l/2.0))
 	global s
 	# call = s.readline()
 	# print (call)
 	# if b"ok" in call:
-	vA=max(-255,min(255,vA*200/33))
-	vB=max(-255,min(255,vB*200/33))
+	vA=max(-255,min(255,vA))
+	vB=max(-255,min(255,vB))
 	
 	x=bytearray("{},{};".format(vA,vB))
-	print(x)
+	print(x,v,w)
 	s.write(x)
 
 

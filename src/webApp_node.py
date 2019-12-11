@@ -62,8 +62,8 @@ def changed(message):
 		data['vel'] += float(message['vel'])
 		data['omega'] += float(message['omega'])  
 	
-	data['vel']=max(-10,min(data['vel'],10))
-	data['omega']=max(-10,min(data['omega'],10))
+	data['vel']=max(-8,min(data['vel'],8))
+	data['omega']=max(-100,min(data['omega'],100))
 	vel_publisher(data['vel'],data['omega'])
 	emit('update value', data, broadcast=True)
 
