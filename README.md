@@ -21,7 +21,7 @@ A Mobile Robot based on ROS(Robot Operation System). With a webApp to control th
 ### Videos:
 ---------------------
 | webApp Demo | Object Detection |
-| :------------:  | :------:
+| :------------:  | :------: |
 |  [![webApp demo](https://img.youtube.com/vi/RLWXIMHiFrg/0.jpg)](https://www.youtube.com/watch?v=RLWXIMHiFrg)  |  [![webApp demo](https://img.youtube.com/vi/8PCAIjGwoj0/0.jpg)](https://www.youtube.com/watch?v=8PCAIjGwoj0) |
 
 | Bot-running | |
