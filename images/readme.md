@@ -3,7 +3,7 @@
 
 
 ## images:
--------------------------
+
 
  Bot isometric: 
  ![Bot top-view](/images/bot-isometric.jpg)
